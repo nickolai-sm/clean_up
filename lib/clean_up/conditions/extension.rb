@@ -2,14 +2,14 @@ require 'mime-types'
 
 module CleanUp
   module Conditions
-    class Format
+    class Extension
       def initialize(value)
         @pattern = Array(value)
       end
 
       def match?(file)
-        extension = MIME::Types.of(file).first
-        
+        extension = MIME::Types.of(file).first # File.extname(file)
+
         extension && @pattern.include?(extension.preferred_extension)
       end
     end
