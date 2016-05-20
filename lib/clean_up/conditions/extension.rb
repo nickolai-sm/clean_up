@@ -1,5 +1,3 @@
-require 'mime-types'
-
 module CleanUp
   module Conditions
     class Extension
@@ -8,9 +6,9 @@ module CleanUp
       end
 
       def match?(file)
-        extension = MIME::Types.of(file).first # File.extname(file)
+        extension = File.extname(file)[1..-1]
 
-        extension && @pattern.include?(extension.preferred_extension)
+        extension && @pattern.include?(extension)
       end
     end
   end

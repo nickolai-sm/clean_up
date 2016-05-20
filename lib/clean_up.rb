@@ -22,9 +22,9 @@ module CleanUp
           entry_expand_path = folder_rules.expand_path(entry)
 
           if File.directory?(entry_expand_path)
-            folder_rules.process_directory(entry) || puts("No match conditions: #{entry}")
+            folder_rules.process_directory(entry_expand_path) || puts("No match conditions: #{entry}")
           else
-            folder_rules.process_file(entry) || puts("No match conditions: #{entry}")
+            folder_rules.process_file(entry_expand_path) || puts("No match conditions: #{entry}")
           end
         end
       end

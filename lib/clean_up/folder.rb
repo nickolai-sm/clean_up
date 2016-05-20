@@ -33,13 +33,13 @@ module CleanUp
 
     def process_directory(directory)
       directory_rules.detect do |rule|
-        rule.call(directory, source, target)
+        rule.call(directory, target)
       end
     end
 
     def process_file(file)
       files_rules.detect do |rule|
-        rule.call(file, source, target)
+        rule.call(file, target)
       end
     end
 
@@ -52,7 +52,7 @@ module CleanUp
     end
 
     def expand_path(entry)
-      File.join(source, entry)
+      File.expand_path(entry, source)
     end
 
     def with_options(format, options_block)

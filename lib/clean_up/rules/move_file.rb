@@ -6,9 +6,9 @@ module CleanUp
         @options = options
       end
 
-      def call(entry, source, target)
-        if @conditions.all? { |c| c.match?(entry)}
-          puts "Will move file `#{File.join(source, entry)}` to folder `#{full_target_folder(target)}`."
+      def call(entry, target)
+        if @conditions.all? { |c| c.match?(entry) }
+          puts "Will move file `#{entry}` to folder `#{full_target_folder(target)}`."
 
           # FileUtils.mv(expand_file_path, full_target_folder, verbose: verbose)
           true
