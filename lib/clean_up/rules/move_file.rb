@@ -1,12 +1,20 @@
 module CleanUp
   module Rules
     class MoveFile < Base
-      def call(entry, source, target)
-        puts "Will move file `#{File.join(source, entry)}` to folder `#{full_target_folder(target)}`."
-
-        # FileUtils.mv(expand_file_path, full_target_folder, verbose: verbose)
-        true
+      def initialize(options)
+        @conditions = Conditions.build_for_file(options)
+        @options = options
       end
+
+      def call(entry, source, target)
+        if @conditions.all? { |c| c.match?(entry)}
+          puts "Will move file `#{File.join(source, entry)}` to folder `#{full_target_folder(target)}`."
+
+          # FileUtils.mv(expand_file_path, full_target_folder, verbose: verbose)
+          true
+        end
+      end
+
       private
 
       def full_target_folder(target)

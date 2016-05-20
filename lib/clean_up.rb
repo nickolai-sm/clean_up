@@ -7,6 +7,8 @@ require 'clean_up/folders_rules'
 require 'clean_up/option_values'
 
 module CleanUp
+  IGNORED_ENTRIES = %w(. .. .DS_Store .localized)
+
   class << self
     attr_reader :folders_rules
 
@@ -16,11 +18,13 @@ module CleanUp
 
     def check
       Array(folders_rules).each do |folder_rules|
-        Dir.entries(folder_rules.source).each do |entry|
-          if File.directory?(entry)
-            folder_rules.process_directory(entry)
+        (Dir.entries(folder_rules.source) - IGNORED_ENTRIES).each do |entry|
+          entry_expand_path = folder_rules.expand_path(entry)
+
+          if File.directory?(entry_expand_path)
+            folder_rules.process_directory(entry) || puts("No match conditions: #{entry}")
           else
-            folder_rules.process_file(entry)
+            folder_rules.process_file(entry) || puts("No match conditions: #{entry}")
           end
         end
       end

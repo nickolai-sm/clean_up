@@ -1,10 +1,11 @@
 module CleanUp
   class OptionValues
     OPTIONS = %w(dir extension pattern files_amount size)
+    BLOCK_OPTIONS = %w(contains)
 
     attr_reader :options
 
-    def self.parse(format, &block)
+    def self.parse(format = nil, &block)
       new(format, &block).options
     end
 
@@ -18,8 +19,12 @@ module CleanUp
       method.to_s.in?(OPTIONS) || super
     end
 
-    def method_missing(method, *args)
-      @options[method.to_s] = args
+    def method_missing(method, *args, &block)
+      if BLOCK_OPTIONS.include?(method.to_s)
+        @options[method.to_s] = block
+      elsif OPTIONS.include?(method.to_s)
+        @options[method.to_s] = args
+      end
     end
   end
 end

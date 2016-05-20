@@ -7,11 +7,11 @@ module CleanUp
     end
 
     def source(folder = nil)
-      @source ||= folder
+      @source ||= File.expand_path(folder)
     end
 
     def target(folder = nil)
-      @target ||= folder
+      @target ||= File.expand_path(folder)
     end
 
     def initialize(strategy, &block)
@@ -25,7 +25,7 @@ module CleanUp
       end
     end
 
-    def directory(format, &block)
+    def directory(format = nil, &block)
       with_options(format, block) do
         @directory_rules << directory_rule_class.new(options)
       end
@@ -33,13 +33,13 @@ module CleanUp
 
     def process_directory(directory)
       directory_rules.detect do |rule|
-        rule.match?(directory) && rule.call(directory, source, target)
+        rule.call(directory, source, target)
       end
     end
 
     def process_file(file)
       files_rules.detect do |rule|
-        rule.match?(file) && rule.call(file, source, target)
+        rule.call(file, source, target)
       end
     end
 
@@ -49,6 +49,10 @@ module CleanUp
 
     def directory_rule_class
       strategy == :move ? Rules::MoveDirectory : Rules::CopyDirectory
+    end
+
+    def expand_path(entry)
+      File.join(source, entry)
     end
 
     def with_options(format, options_block)

@@ -3,8 +3,8 @@ require 'mime-types'
 module CleanUp
   module Conditions
     class Extension
-      def initialize(value)
-        @pattern = Array(value)
+      def initialize(*value)
+        @pattern = *value
       end
 
       def match?(file)
