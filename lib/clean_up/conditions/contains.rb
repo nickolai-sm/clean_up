@@ -11,8 +11,8 @@ module CleanUp
       end
 
       def match?(folder)
-        entries = Dir.entries(folder) - IGNORED_ENTRIES
-        files = entries.select { |entry| !File.directory?(entry) }
+        entries = (Dir.entries(folder) - IGNORED_ENTRIES).map { |e| File.expand_path(e, folder) }
+        files = entries.reject { |entry| File.directory?(entry) }
 
         match_file_conditions?(files)
       end

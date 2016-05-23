@@ -3,7 +3,7 @@ module CleanUp
     #TODO size conditions format
     class Size
       def initialize(*value)
-        @pattern = parse(value)
+        @pattern = parse(value.first)
       end
 
       def match?(file)
