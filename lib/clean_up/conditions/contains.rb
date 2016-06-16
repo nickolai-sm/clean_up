@@ -6,6 +6,10 @@ module CleanUp
         instance_eval(&block)
       end
 
+      def at_least(number, &block)
+        number.times { instance_eval(&block) }
+      end
+
       def file(&block)
         @file_conditions << Conditions.build_for_file(OptionValues.parse(&block))
       end
@@ -17,11 +21,14 @@ module CleanUp
         match_file_conditions?(files)
       end
 
+      private
+
       def match_file_conditions?(files)
         @file_conditions.all? do |conditions|
-          files.any? do |file|
+          file = files.detect do |file|
             conditions.all? { |c| c.match?(file) }
           end
+          file && files.delete(file)
         end
       end
     end
