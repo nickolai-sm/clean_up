@@ -24,8 +24,8 @@ module CleanUp
 
       def match_file_conditions?(files)
         @file_conditions.all? do |conditions|
-          file = files.detect do |file|
-            conditions.all? { |c| c.match?(file) }
+          file = files.detect do |f|
+            conditions.all? { |c| c.match?(f) }
           end
           file && files.delete(file)
         end

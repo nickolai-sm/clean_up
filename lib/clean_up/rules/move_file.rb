@@ -7,12 +7,16 @@ module CleanUp
       end
 
       def call(entry, target)
-        if @conditions.all? { |c| c.match?(entry) }
+        if match_conditions?
           FileUtils.mv(entry, full_target_folder(target), verbose: true)
         end
       end
 
       private
+
+      def match_conditions?
+        @conditions.all? { |c| c.match?(entry) }
+      end
 
       def full_target_folder(target)
         File.join(File.expand_path(target), options['dir'])
