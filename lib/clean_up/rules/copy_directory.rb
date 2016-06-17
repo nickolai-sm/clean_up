@@ -7,7 +7,9 @@ module CleanUp
 
       def call(entry, target)
         if match_conditions?(entry)
-          FileUtils.cp_r(entry, full_target_folder(target), verbose: true)
+          puts "Will copy file `#{entry}` to folder `#{full_target_folder(target)}`."
+
+          true
         end
       end
     end

@@ -22,9 +22,9 @@ module CleanUp
       folders_rules.each do |folder_rules|
         dir_entries(folder_rules.source).each do |entry|
           if File.directory?(entry)
-            folder_rules.process_directory(entry)
+            folder_rules.process_directory(entry) || puts("No match conditions: #{entry}")
           else
-            folder_rules.process_file(entry)
+            folder_rules.process_file(entry) || puts("No match conditions: #{entry}")
           end
         end
       end
