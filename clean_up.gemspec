@@ -4,11 +4,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'clean_up/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'clean_up'
+  spec.name          = 'cleanup'
   spec.version       = CleanUp::VERSION
   spec.authors       = ['Nickolai Smirnov']
   spec.email         = ['sm-nickolai@gmail.com']
 
+  spec.license       = 'MIT'
   spec.summary       = 'Files and Directories clean up tool'
   spec.homepage      = 'https://github.com/nickolai-sm/clean_up'
 
