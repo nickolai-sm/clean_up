@@ -6,11 +6,11 @@ require 'clean_up/conditions/size'
 
 module CleanUp
   module Conditions
-    # TODO created_at condition
+    # TODO: created_at condition
     TYPES_CONDITIONS = {
       file: %w(name extension pattern size),
       directory: %w(contains name pattern)
-    }
+    }.freeze
 
     class << self
       def build_for_file(options)

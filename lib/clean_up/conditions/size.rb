@@ -1,6 +1,6 @@
 module CleanUp
   module Conditions
-    #TODO size conditions format
+    # TODO: size conditions format
     class Size
       def initialize(*value)
         @pattern = parse(value.first)

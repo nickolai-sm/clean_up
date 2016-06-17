@@ -1,7 +1,7 @@
 module CleanUp
   class OptionValues
-    SUPPORTED_OPTIONS = %w(dir extension pattern files_amount size)
-    SUPPORTED_BLOCK_OPTIONS = %w(contains)
+    SUPPORTED_OPTIONS = %w(dir extension pattern files_amount size).freeze
+    SUPPORTED_BLOCK_OPTIONS = %w(contains).freeze
 
     attr_reader :options
 

@@ -7,7 +7,7 @@ module CleanUp
         @options = options
       end
 
-      def call(entry, source, target)
+      def call(_entry, _source, _target)
         raise NotImplementedError
       end
     end

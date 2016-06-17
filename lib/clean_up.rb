@@ -7,7 +7,7 @@ require 'clean_up/folders_rules'
 require 'clean_up/option_values'
 
 module CleanUp
-  IGNORED_ENTRIES = %w(. .. .DS_Store .localized)
+  IGNORED_ENTRIES = %w(. .. .DS_Store .localized).freeze
 
   class << self
     def define(&block)
