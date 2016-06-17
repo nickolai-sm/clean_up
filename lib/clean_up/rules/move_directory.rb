@@ -1,9 +1,8 @@
 module CleanUp
   module Rules
-    class MoveDirectory < MoveFile
-      def initialize(options)
-        @conditions = Conditions.build_for_directory(options)
-        @options = options
+    class MoveDirectory < Base
+      def build_conditions(options)
+        Conditions.build_for_directory(options)
       end
 
       def call(entry, target)
