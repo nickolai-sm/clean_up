@@ -41,7 +41,7 @@ end
 
 and run
 
-$ bin/cleanup
+    $ bin/cleanup
 
 ## Contributing
 
