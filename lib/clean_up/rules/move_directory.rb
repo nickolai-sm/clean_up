@@ -6,7 +6,7 @@ module CleanUp
       end
 
       def call(entry, target)
-        if match_conditions?
+        if match_conditions?(entry)
           FileUtils.mv(entry, full_target_folder(target), verbose: true)
         end
       end

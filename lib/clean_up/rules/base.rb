@@ -18,7 +18,7 @@ module CleanUp
         raise NotImplementedError
       end
 
-      def match_conditions?
+      def match_conditions?(entry)
         @conditions.all? { |c| c.match?(entry) }
       end
 
