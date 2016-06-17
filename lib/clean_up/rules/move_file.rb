@@ -8,10 +8,7 @@ module CleanUp
 
       def call(entry, target)
         if @conditions.all? { |c| c.match?(entry) }
-          puts "Will move file `#{entry}` to folder `#{full_target_folder(target)}`."
-
-          # FileUtils.mv(expand_file_path, full_target_folder, verbose: verbose)
-          true
+          FileUtils.mv(entry, full_target_folder(target), verbose: true)
         end
       end
 

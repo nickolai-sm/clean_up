@@ -6,27 +6,29 @@ module CleanUp
       new(strategy, &block)
     end
 
-    def source(folder = nil)
-      @source ||= File.expand_path(folder)
-    end
-
-    def target(folder = nil)
-      @target ||= File.expand_path(folder)
-    end
-
     def initialize(strategy, &block)
       @strategy, @files_rules, @directory_rules = strategy, [], []
       instance_eval(&block)
     end
 
-    def file(format = nil, &block)
-      with_options(format, block) do
+    # Implement setter & getter for source folder.
+    def source(folder = nil)
+      @source ||= File.expand_path(folder)
+    end
+
+    # Implement setter & getter for target folder.
+    def target(folder = nil)
+      @target ||= File.expand_path(folder)
+    end
+
+    def file(&block)
+      with_options(block) do
         @files_rules << file_rule_class.new(options)
       end
     end
 
-    def directory(format = nil, &block)
-      with_options(format, block) do
+    def directory(&block)
+      with_options(block) do
         @directory_rules << directory_rule_class.new(options)
       end
     end
@@ -43,6 +45,8 @@ module CleanUp
       end
     end
 
+    private
+
     def file_rule_class
       strategy == :move ? Rules::MoveFile : Rules::CopyFile
     end
@@ -51,8 +55,8 @@ module CleanUp
       strategy == :move ? Rules::MoveDirectory : Rules::CopyDirectory
     end
 
-    def with_options(format, options_block)
-      @options = CleanUp::OptionValues.parse(format, &options_block)
+    def with_options(options_block)
+      @options = OptionValues.parse(&options_block)
 
       yield if block_given?
     ensure

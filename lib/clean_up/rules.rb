@@ -6,5 +6,6 @@ require 'clean_up/rules/move_directory'
 
 module CleanUp
   module Rules
+
   end
 end
