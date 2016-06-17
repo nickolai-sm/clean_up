@@ -10,23 +10,29 @@ module CleanUp
   IGNORED_ENTRIES = %w(. .. .DS_Store .localized)
 
   class << self
-    attr_reader :folders_rules
-
     def define(&block)
       @folders_rules = FoldersRules.collect(&block)
     end
 
-    def check
-      Array(folders_rules).each do |folder_rules|
-        (Dir.entries(folder_rules.source) - IGNORED_ENTRIES).each do |entry|
-          entry_expand_path = folder_rules.expand_path(entry)
+    def folders_rules
+      @folders_rules || []
+    end
 
-          if File.directory?(entry_expand_path)
-            folder_rules.process_directory(entry_expand_path) || puts("No match conditions: #{entry}")
+    def check
+      folders_rules.each do |folder_rules|
+        dir_entries(folder_rules.source).each do |entry|
+          if File.directory?(entry)
+            folder_rules.process_directory(entry) || puts("No match conditions: #{entry}")
           else
-            folder_rules.process_file(entry_expand_path) || puts("No match conditions: #{entry}")
+            folder_rules.process_file(entry) || puts("No match conditions: #{entry}")
           end
         end
+      end
+    end
+
+    def dir_entries(folder)
+      (Dir.entries(folder) - IGNORED_ENTRIES).map do |entry|
+        File.expand_path(entry, folder)
       end
     end
   end

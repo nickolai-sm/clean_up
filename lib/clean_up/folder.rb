@@ -51,10 +51,6 @@ module CleanUp
       strategy == :move ? Rules::MoveDirectory : Rules::CopyDirectory
     end
 
-    def expand_path(entry)
-      File.expand_path(entry, source)
-    end
-
     def with_options(format, options_block)
       @options = CleanUp::OptionValues.parse(format, &options_block)
 
