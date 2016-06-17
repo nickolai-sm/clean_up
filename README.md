@@ -1,10 +1,12 @@
 # CleanUp
 
-## Installation
+Move and copy files and directories to appointed directories according defined conditions.
 
 ## Usage
 
-Usage example:
+Define your rules in `config/rules.rb` file.
+
+Example:
 
 ```` ruby
 
@@ -36,6 +38,10 @@ CleanUp.define do
 end
 
 ````
+
+and run
+
+$ bin/cleanup
 
 ## Contributing
 
