@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module CleanUp
   module Rules
     class CopyDirectory < Base
