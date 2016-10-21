@@ -2,11 +2,22 @@
 
 Move and copy files and directories to appointed directories according defined conditions.
 
+## Installation
+
+    $ gem install cleanup
+
 ## Usage
 
-Define your rules in `config/rules.rb` file.
+Write configuration file with rules `rules.rb` and place it in current folder or in your home folder and run:
 
-Example:
+    $ cleanup
+    
+Also you can specify path to config file:
+
+    $ cleanup -c path/to/config/rules.rb
+    
+## Config Example
+Example of rules.rb:
 
 ```` ruby
 
@@ -39,9 +50,6 @@ end
 
 ````
 
-and run
-
-    $ bin/cleanup
 
 ## Contributing
 
