@@ -23,7 +23,7 @@ module CleanUp
       end
 
       def full_target_folder(target)
-        File.join(File.expand_path(target), options['dir'])
+        [File.absolute_path(target), options['dir']].join(File::SEPARATOR)
       end
     end
   end

@@ -32,7 +32,7 @@ module CleanUp
 
     def dir_entries(folder)
       (Dir.entries(folder) - IGNORED_ENTRIES).map do |entry|
-        File.expand_path(entry, folder)
+        File.absolute_path(entry, folder)
       end
     end
   end

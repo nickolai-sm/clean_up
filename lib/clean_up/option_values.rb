@@ -22,7 +22,12 @@ module CleanUp
       if SUPPORTED_BLOCK_OPTIONS.include?(method.to_s)
         @options[method.to_s] = block
       elsif SUPPORTED_OPTIONS.include?(method.to_s)
-        @options[method.to_s] = args
+        case method
+        when 'dir'
+          @options[method.to_s] = args.first.end_with?('/') ? args.first : "#{args.first}/"
+        else
+          @options[method.to_s] = args
+        end
       end
     end
   end

@@ -10,7 +10,7 @@ OptionParser.new do |opts|
   opts.banner = "Usage: cleanup [options]"
 
   opts.on('-c', '--config [path]', 'Default: full path to rules.rb file') do |path|
-    options[:path] = path if path
+    options[:path] = File.expand_path(path) if path
   end
 
   opts.on('-v', '--version') { puts "CleanUp v#{CleanUp::VERSION}"; exit(0) }
