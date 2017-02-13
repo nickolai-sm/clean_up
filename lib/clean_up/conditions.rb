@@ -3,13 +3,14 @@ require 'clean_up/conditions/contains'
 require 'clean_up/conditions/pattern'
 require 'clean_up/conditions/name'
 require 'clean_up/conditions/size'
+require 'clean_up/conditions/file'
 
 module CleanUp
   module Conditions
     # TODO: created_at condition
     TYPES_CONDITIONS = {
       file: %w(name extension pattern size),
-      directory: %w(contains name pattern)
+      directory: %w(name pattern)
     }.freeze
 
     class << self
@@ -30,12 +31,7 @@ module CleanUp
       end
 
       def build(type, *args)
-        case type
-        when 'pattern', 'size', 'name', 'extension'
-          Conditions.const_get(type.capitalize).new(*args)
-        when 'contains'
-          Conditions::Contains.new(&args.first)
-        end
+        Conditions.const_get(type.capitalize).new(*args)
       end
     end
   end

@@ -7,13 +7,16 @@ require 'clean_up/version'
 options = {}
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: cleanup [options]"
+  opts.banner = 'Usage: cleanup [options]'
 
   opts.on('-c', '--config [path]', 'Default: full path to rules.rb file') do |path|
     options[:path] = File.expand_path(path) if path
   end
 
-  opts.on('-v', '--version') { puts "CleanUp v#{CleanUp::VERSION}"; exit(0) }
+  opts.on('-v', '--version') do
+    puts "CleanUp v#{CleanUp::VERSION}"
+    exit(0)
+  end
 end.parse!
 
 [
@@ -25,4 +28,4 @@ end.parse!
     load(file)
     CleanUp.check
   end
-end || puts("Config file were not found."); exit(1)
+end || puts('Config file were not found.'); exit(1)

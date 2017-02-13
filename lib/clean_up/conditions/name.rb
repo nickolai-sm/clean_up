@@ -7,7 +7,7 @@ module CleanUp
 
       def match?(file)
         @pattern.any? do |filename|
-          filename == File.basename(file, '.*')
+          filename == ::File.basename(file, '.*')
         end
       end
     end

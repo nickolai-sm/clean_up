@@ -6,7 +6,7 @@ module CleanUp
       end
 
       def match?(file)
-        @pattern.any? { |regexp| regexp.match(File.basename(file, '.*')) }
+        @pattern.any? { |regexp| regexp.match(::File.basename(file, '.*')) }
       end
     end
   end
