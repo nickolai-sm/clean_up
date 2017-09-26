@@ -9,6 +9,14 @@ module CleanUp
         @actions << Actions::Copy.new(target, *args, file: true)
       end
 
+      def unzip_to(*args, **options)
+        @actions << Actions::Unzip.new(target, *args, **options)
+      end
+
+      def convert_to(format)
+        @actions << Actions::Convert.new(format)
+      end
+
       def any_entry_match?(entry)
         check_entry(entry)
       end
