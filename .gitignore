@@ -9,3 +9,4 @@
 /tmp/
 /config/rules.rb
 rubocop.yml
+/test

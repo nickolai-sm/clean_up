@@ -59,7 +59,7 @@ module CleanUp
       end
 
       def any_entry_match?(source)
-        source.folders.any? { |folder| check_entry(CleanUp::FolderEntity.new(folder)) }
+        source.folders.map { |folder| check_entry(CleanUp::FolderEntity.new(folder)) }.any?
       end
 
       def all_entries_match?(source)

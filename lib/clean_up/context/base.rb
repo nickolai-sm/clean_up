@@ -1,7 +1,7 @@
 module CleanUp
   module Context
     class Base
-      SUPPORTED_OPTIONS = %w(dir extension pattern files_amount size).freeze
+      SUPPORTED_OPTIONS = %w(dir extension pattern files_amount size encoding name).freeze
 
       attr_reader :options, :actions, :contexts, :conditions
 

@@ -5,7 +5,7 @@ module CleanUp
     class Move < Base
       def call(entry)
         folders.each do |folder|
-          FileUtils.mv(entry, full_target_folder(folder), verbose: true)
+          FileUtils.mv(entry, full_target_folder(folder), verbose: ENV['VERBOSE'])
         end
       end
     end

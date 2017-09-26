@@ -8,7 +8,8 @@ module CleanUp
       def match?(file)
         extension = ::File.extname(file)[1..-1]
 
-        extension && @pattern.include?(extension)
+
+        extension && @pattern.include?(extension.downcase)
       end
     end
   end

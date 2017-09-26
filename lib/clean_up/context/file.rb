@@ -21,6 +21,8 @@ module CleanUp
         folder_entity.files.any? do |file|
           conditions.all? { |condition| condition.match?(file) }
         end
+
+        true
       end
 
       def apply_actions(folder_entity)
